@@ -34,7 +34,7 @@
     .info-table th { background: #f5f5f5; color: #666; width: 180px; }
     .info-table code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.8rem; }
     .color-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
-    .color-btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: bold; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: transform 0.1s, box-shadow 0.1s; }
+    .color-btn { display: inline-block; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: bold; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: transform 0.1s, box-shadow 0.1s; text-decoration: none; }
     .color-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .color-btn.active { outline: 3px solid #333; outline-offset: 2px; }
     .current-status { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 16px 0; }
@@ -81,12 +81,12 @@
 
     <h2>色を選択</h2>
     <div class="color-buttons">
-      <button class="color-btn" style="background:#FF4444" data-color="red" onclick="setColor('red')">🔴 Red</button>
-      <button class="color-btn" style="background:#4444FF" data-color="blue" onclick="setColor('blue')">🔵 Blue</button>
-      <button class="color-btn" style="background:#44BB44" data-color="green" onclick="setColor('green')">🟢 Green</button>
-      <button class="color-btn" style="background:#FFCC00; color:#333; text-shadow:none" data-color="yellow" onclick="setColor('yellow')">🟡 Yellow</button>
-      <button class="color-btn" style="background:#9944BB" data-color="purple" onclick="setColor('purple')">🟣 Purple</button>
-      <button class="color-btn" style="background:#FF8800" data-color="orange" onclick="setColor('orange')">🟠 Orange</button>
+      <a class="color-btn" style="background:#FF4444" href="?color=red">🔴 Red</a>
+      <a class="color-btn" style="background:#4444FF" href="?color=blue">🔵 Blue</a>
+      <a class="color-btn" style="background:#44BB44" href="?color=green">🟢 Green</a>
+      <a class="color-btn" style="background:#FFCC00; color:#333; text-shadow:none" href="?color=yellow">🟡 Yellow</a>
+      <a class="color-btn" style="background:#9944BB" href="?color=purple">🟣 Purple</a>
+      <a class="color-btn" style="background:#FF8800" href="?color=orange">🟠 Orange</a>
     </div>
 
     <h2>現在の状態</h2>
