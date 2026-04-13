@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Check - Root (Red)</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon-check/favicons/red.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-check/favicons/red-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-check/favicons/red-180.png">
+
+  <!-- OGP -->
+  <meta property="og:title" content="Favicon Check - Root (Red)">
+  <meta property="og:description" content="ルートページ：赤いfaviconを設定しています">
+  <meta property="og:image" content="https://riku.github.io/favicon-check/favicons/red-192.png">
+  <meta property="og:url" content="https://riku.github.io/favicon-check/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://riku.github.io/favicon-check/favicons/red-192.png">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #fff8f8; color: #333; }
+    header { background: #FF4444; color: white; padding: 20px 32px; }
+    header h1 { font-size: 1.5rem; }
+    header p { opacity: 0.85; margin-top: 4px; font-size: 0.9rem; }
+    main { max-width: 900px; margin: 0 auto; padding: 32px; }
+    .badge { display: inline-block; background: #FF4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 24px; }
+    h2 { font-size: 1.1rem; margin: 24px 0 12px; color: #555; border-left: 3px solid #FF4444; padding-left: 10px; }
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 32px; }
+    .link-card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: white; text-decoration: none; color: inherit; transition: box-shadow 0.15s; }
+    .link-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .link-card .dot { width: 24px; height: 24px; border-radius: 4px; margin-bottom: 8px; }
+    .link-card strong { display: block; margin-bottom: 4px; }
+    .link-card span { font-size: 0.8rem; color: #888; }
+    .info-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
+    .info-table th, .info-table td { padding: 10px 16px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.875rem; }
+    .info-table th { background: #f5f5f5; color: #666; width: 180px; }
+    .info-table code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.8rem; }
+    .favicon-preview { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+    .favicon-item { text-align: center; font-size: 0.75rem; color: #888; }
+    .favicon-item img { display: block; margin: 0 auto 4px; border: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔴 Root Page — Favicon Check</h1>
+    <p>このページのfaviconは <strong>赤 (Red)</strong> に設定されています</p>
+  </header>
+  <main>
+    <span class="badge">/ (ルート)</span>
+
+    <h2>ページ一覧</h2>
+    <div class="links">
+      <a class="link-card" href="/favicon-check/">
+        <div class="dot" style="background:#FF4444"></div>
+        <strong>Root /</strong>
+        <span>favicon: 赤 (Red)</span>
+      </a>
+      <a class="link-card" href="/favicon-check/sub/">
+        <div class="dot" style="background:#4444FF"></div>
+        <strong>Sub /sub/</strong>
+        <span>favicon: 青 (Blue)</span>
+      </a>
+      <a class="link-card" href="/favicon-check/query/">
+        <div class="dot" style="background:#44BB44"></div>
+        <strong>Query /query/</strong>
+        <span>クエリパラメータで動的変更</span>
+      </a>
+    </div>
+
+    <h2>このページのfavicon設定</h2>
+    <table class="info-table">
+      <tr><th>パス</th><td><code>/</code></td></tr>
+      <tr><th>favicon (SVG)</th><td><code>&lt;link rel="icon" type="image/svg+xml" href="favicons/red.svg"&gt;</code></td></tr>
+      <tr><th>favicon (PNG 32px)</th><td><code>&lt;link rel="icon" sizes="32x32" href="favicons/red-32.png"&gt;</code></td></tr>
+      <tr><th>apple-touch-icon</th><td><code>&lt;link rel="apple-touch-icon" sizes="180x180" href="favicons/red-180.png"&gt;</code></td></tr>
+      <tr><th>OGP image</th><td><code>favicons/red-192.png</code></td></tr>
+    </table>
+
+    <h2>favicon プレビュー</h2>
+    <div class="favicon-preview">
+      <div class="favicon-item">
+        <img src="/favicon-check/favicons/red-32.png" width="32" height="32" alt="32px">
+        32×32px
+      </div>
+      <div class="favicon-item">
+        <img src="/favicon-check/favicons/red-180.png" width="60" height="60" alt="180px">
+        180×180px<br>(apple-touch-icon)
+      </div>
+      <div class="favicon-item">
+        <img src="/favicon-check/favicons/red-192.png" width="64" height="64" alt="192px">
+        192×192px<br>(OGP)
+      </div>
+    </div>
+
+    <h2>キャッシュ確認のヒント</h2>
+    <table class="info-table">
+      <tr><th>Chrome DevTools</th><td>Network タブで <code>Disable cache</code> にチェックし、faviconリクエストを確認</td></tr>
+      <tr><th>強制リロード</th><td><code>Cmd+Shift+R</code> (Mac) / <code>Ctrl+Shift+R</code> (Windows)</td></tr>
+      <tr><th>favicon直接アクセス</th><td><a href="/favicon-check/favicons/red.svg">red.svg</a> / <a href="/favicon-check/favicons/red-32.png">red-32.png</a></td></tr>
+      <tr><th>別パスとの比較</th><td><a href="/favicon-check/sub/">→ /sub/ (Blue)</a> に移動してタブのfaviconが変わるか確認</td></tr>
+    </table>
+  </main>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Check - Query Parameter</title>
+
+  <!-- OGP: クエリパラメータによってJSで動的に書き換え -->
+  <meta property="og:title" content="Favicon Check - Query Parameter">
+  <meta property="og:description" content="クエリパラメータ ?color= でfaviconを動的に変更します">
+  <meta property="og:type" content="website">
+  <meta id="og-image" property="og:image" content="">
+  <meta id="og-url" property="og:url" content="">
+  <meta name="twitter:card" content="summary">
+  <meta id="twitter-image" name="twitter:image" content="">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f8fff8; color: #333; }
+    header { background: #44BB44; color: white; padding: 20px 32px; }
+    header h1 { font-size: 1.5rem; }
+    header p { opacity: 0.85; margin-top: 4px; font-size: 0.9rem; }
+    main { max-width: 900px; margin: 0 auto; padding: 32px; }
+    .badge { display: inline-block; background: #44BB44; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 24px; }
+    h2 { font-size: 1.1rem; margin: 24px 0 12px; color: #555; border-left: 3px solid #44BB44; padding-left: 10px; }
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 32px; }
+    .link-card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: white; text-decoration: none; color: inherit; transition: box-shadow 0.15s; }
+    .link-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .link-card .dot { width: 24px; height: 24px; border-radius: 4px; margin-bottom: 8px; }
+    .link-card strong { display: block; margin-bottom: 4px; }
+    .link-card span { font-size: 0.8rem; color: #888; }
+    .info-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
+    .info-table th, .info-table td { padding: 10px 16px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.875rem; }
+    .info-table th { background: #f5f5f5; color: #666; width: 180px; }
+    .info-table code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.8rem; }
+    .color-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    .color-btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: bold; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: transform 0.1s, box-shadow 0.1s; }
+    .color-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .color-btn.active { outline: 3px solid #333; outline-offset: 2px; }
+    .current-status { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 16px 0; }
+    .current-status .preview { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .current-status .preview img { border: 1px solid #eee; }
+    .current-status .color-name { font-size: 1.5rem; font-weight: bold; }
+    .url-display { background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px 14px; font-family: monospace; font-size: 0.8rem; word-break: break-all; margin: 8px 0; }
+    .note { background: #efe; border-left: 3px solid #44BB44; padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 0.875rem; margin-top: 12px; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.85em; }
+    pre { background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px; padding: 16px; font-size: 0.8rem; overflow-x: auto; line-height: 1.6; }
+    .history { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-top: 12px; }
+    .history h3 { font-size: 0.875rem; color: #888; margin-bottom: 8px; }
+    #history-list { list-style: none; font-size: 0.8rem; color: #555; }
+    #history-list li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+    #history-list li:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🟢 Query Page — Favicon Check</h1>
+    <p>クエリパラメータ <strong>?color=</strong> でfaviconを動的に変更します</p>
+  </header>
+  <main>
+    <span class="badge">/query/</span>
+
+    <h2>ページ一覧</h2>
+    <div class="links">
+      <a class="link-card" href="/favicon-check/">
+        <div class="dot" style="background:#FF4444"></div>
+        <strong>Root /</strong>
+        <span>favicon: 赤 (Red)</span>
+      </a>
+      <a class="link-card" href="/favicon-check/sub/">
+        <div class="dot" style="background:#4444FF"></div>
+        <strong>Sub /sub/</strong>
+        <span>favicon: 青 (Blue)</span>
+      </a>
+      <a class="link-card" href="/favicon-check/query/">
+        <div class="dot" style="background:#44BB44"></div>
+        <strong>Query /query/</strong>
+        <span>クエリパラメータで動的変更 ← 現在地</span>
+      </a>
+    </div>
+
+    <h2>色を選択</h2>
+    <div class="color-buttons">
+      <button class="color-btn" style="background:#FF4444" data-color="red" onclick="setColor('red')">🔴 Red</button>
+      <button class="color-btn" style="background:#4444FF" data-color="blue" onclick="setColor('blue')">🔵 Blue</button>
+      <button class="color-btn" style="background:#44BB44" data-color="green" onclick="setColor('green')">🟢 Green</button>
+      <button class="color-btn" style="background:#FFCC00; color:#333; text-shadow:none" data-color="yellow" onclick="setColor('yellow')">🟡 Yellow</button>
+      <button class="color-btn" style="background:#9944BB" data-color="purple" onclick="setColor('purple')">🟣 Purple</button>
+      <button class="color-btn" style="background:#FF8800" data-color="orange" onclick="setColor('orange')">🟠 Orange</button>
+    </div>
+
+    <h2>現在の状態</h2>
+    <div class="current-status">
+      <div class="preview">
+        <img id="favicon-preview" src="" width="48" height="48" alt="current favicon">
+        <div>
+          <div class="color-name" id="color-label">—</div>
+          <div style="font-size:0.8rem;color:#888">現在のfavicon</div>
+        </div>
+      </div>
+      <div>現在のURL:</div>
+      <div class="url-display" id="current-url">—</div>
+      <div style="margin-top:8px">OGP image:</div>
+      <div class="url-display" id="ogp-url">—</div>
+    </div>
+
+    <div class="history">
+      <h3>変更履歴（このセッション）</h3>
+      <ul id="history-list"><li style="color:#ccc">まだ変更されていません</li></ul>
+    </div>
+
+    <h2>URLで直接指定</h2>
+    <table class="info-table">
+      <tr><th>Red</th><td><a href="/favicon-check/query/?color=red">/query/?color=red</a></td></tr>
+      <tr><th>Blue</th><td><a href="/favicon-check/query/?color=blue">/query/?color=blue</a></td></tr>
+      <tr><th>Green</th><td><a href="/favicon-check/query/?color=green">/query/?color=green</a></td></tr>
+      <tr><th>Yellow</th><td><a href="/favicon-check/query/?color=yellow">/query/?color=yellow</a></td></tr>
+      <tr><th>Purple</th><td><a href="/favicon-check/query/?color=purple">/query/?color=purple</a></td></tr>
+      <tr><th>Orange</th><td><a href="/favicon-check/query/?color=orange">/query/?color=orange</a></td></tr>
+    </table>
+
+    <h2>実装コード</h2>
+    <pre><code>function setFavicon(color) {
+  const base = '/favicon-check/favicons/';
+  const validColors = ['red','blue','green','yellow','purple','orange'];
+  if (!validColors.includes(color)) return;
+
+  // &lt;link rel="icon"&gt; を更新（なければ作成）
+  let iconEl = document.querySelector('link[rel="icon"]');
+  if (!iconEl) {
+    iconEl = document.createElement('link');
+    iconEl.rel = 'icon';
+    document.head.appendChild(iconEl);
+  }
+  iconEl.type = 'image/png';
+  iconEl.sizes = '32x32';
+  iconEl.href = base + color + '-32.png';
+
+  // SVG favicon
+  let svgEl = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+  if (!svgEl) {
+    svgEl = document.createElement('link');
+    svgEl.rel = 'icon';
+    svgEl.type = 'image/svg+xml';
+    document.head.appendChild(svgEl);
+  }
+  svgEl.href = base + color + '.svg';
+
+  // apple-touch-icon
+  let appleEl = document.querySelector('link[rel="apple-touch-icon"]');
+  if (!appleEl) {
+    appleEl = document.createElement('link');
+    appleEl.rel = 'apple-touch-icon';
+    document.head.appendChild(appleEl);
+  }
+  appleEl.sizes = '180x180';
+  appleEl.href = base + color + '-180.png';
+
+  // URLをpushState（ページ遷移なしでURL更新）
+  const url = new URL(window.location);
+  url.searchParams.set('color', color);
+  history.pushState({color}, '', url);
+}</code></pre>
+
+    <div class="note">
+      <strong>注意：</strong> クエリパラメータによるfavicon変更は <code>history.pushState</code> を使用しているため、
+      ページリロードなしでURLが変わります。ただし、<code>&lt;meta property="og:image"&gt;</code> はSNSのクローラーが
+      取得するため、JSでの動的変更は SNS シェア時には反映されません。
+    </div>
+  </main>
+
+  <script>
+    const BASE = '/favicon-check/favicons/';
+    const VALID_COLORS = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+    const COLOR_LABELS = {
+      red: '🔴 Red', blue: '🔵 Blue', green: '🟢 Green',
+      yellow: '🟡 Yellow', purple: '🟣 Purple', orange: '🟠 Orange'
+    };
+
+    function setFavicon(color) {
+      if (!VALID_COLORS.includes(color)) return;
+
+      // link[rel="icon"] SVG
+      let svgEl = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+      if (!svgEl) {
+        svgEl = document.createElement('link');
+        svgEl.rel = 'icon';
+        svgEl.type = 'image/svg+xml';
+        document.head.appendChild(svgEl);
+      }
+      svgEl.href = BASE + color + '.svg';
+
+      // link[rel="icon"] PNG
+      let pngEl = document.querySelector('link[rel="icon"][type="image/png"]');
+      if (!pngEl) {
+        pngEl = document.createElement('link');
+        pngEl.rel = 'icon';
+        pngEl.type = 'image/png';
+        pngEl.sizes = '32x32';
+        document.head.appendChild(pngEl);
+      }
+      pngEl.href = BASE + color + '-32.png';
+
+      // apple-touch-icon
+      let appleEl = document.querySelector('link[rel="apple-touch-icon"]');
+      if (!appleEl) {
+        appleEl = document.createElement('link');
+        appleEl.rel = 'apple-touch-icon';
+        appleEl.sizes = '180x180';
+        document.head.appendChild(appleEl);
+      }
+      appleEl.href = BASE + color + '-180.png';
+
+      // OGP meta tags
+      document.getElementById('og-image').content = location.origin + BASE + color + '-192.png';
+      document.getElementById('og-url').content = location.href;
+      document.getElementById('twitter-image').content = location.origin + BASE + color + '-192.png';
+
+      // UI更新
+      document.getElementById('favicon-preview').src = BASE + color + '-32.png';
+      document.getElementById('color-label').textContent = COLOR_LABELS[color] || color;
+
+      // URLをpushState（ページ遷移なしでURL更新）
+      const url = new URL(window.location);
+      url.searchParams.set('color', color);
+      history.pushState({ color }, '', url);
+      document.getElementById('current-url').textContent = url.toString();
+      document.getElementById('ogp-url').textContent = location.origin + BASE + color + '-192.png';
+
+      // ボタンのアクティブ状態
+      document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.color === color);
+      });
+
+      // 履歴に追加
+      addHistory(color);
+    }
+
+    function addHistory(color) {
+      const list = document.getElementById('history-list');
+      const placeholder = list.querySelector('li[style]');
+      if (placeholder) placeholder.remove();
+
+      const li = document.createElement('li');
+      const time = new Date().toLocaleTimeString('ja-JP');
+      li.textContent = `[${time}] → ${COLOR_LABELS[color] || color}`;
+      list.insertBefore(li, list.firstChild);
+
+      // 最大10件
+      while (list.children.length > 10) list.removeChild(list.lastChild);
+    }
+
+    // 初期化：URLのクエリパラメータを読み取る
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const color = params.get('color');
+      if (color && VALID_COLORS.includes(color)) {
+        setFavicon(color);
+      } else {
+        // デフォルトはgreenにセット（ページのテーマに合わせる）
+        setFavicon('green');
+      }
+    });
+
+    // ブラウザ戻る/進む対応
+    window.addEventListener('popstate', (e) => {
+      if (e.state && e.state.color) {
+        setFavicon(e.state.color);
+      }
+    });
+  </script>
+</body>
+</html>
