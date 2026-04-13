@@ -136,16 +136,6 @@
   iconEl.sizes = '32x32';
   iconEl.href = base + color + '-32.png';
 
-  // SVG favicon
-  let svgEl = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
-  if (!svgEl) {
-    svgEl = document.createElement('link');
-    svgEl.rel = 'icon';
-    svgEl.type = 'image/svg+xml';
-    document.head.appendChild(svgEl);
-  }
-  svgEl.href = base + color + '.svg';
-
   // apple-touch-icon
   let appleEl = document.querySelector('link[rel="apple-touch-icon"]');
   if (!appleEl) {
@@ -179,16 +169,6 @@
 
     function setFavicon(color) {
       if (!VALID_COLORS.includes(color)) return;
-
-      // link[rel="icon"] SVG
-      let svgEl = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
-      if (!svgEl) {
-        svgEl = document.createElement('link');
-        svgEl.rel = 'icon';
-        svgEl.type = 'image/svg+xml';
-        document.head.appendChild(svgEl);
-      }
-      svgEl.href = BASE + color + '.svg';
 
       // link[rel="icon"] PNG
       let pngEl = document.querySelector('link[rel="icon"][type="image/png"]');
