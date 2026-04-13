@@ -1,0 +1,6 @@
+name = "favicon-check"
+compatibility_date = "2025-04-13"
+
+[assets]
+directory = "."
+exclude = [".git/**", ".wrangler/**", ".claude/**", "wrangler.toml", "_config.yml", ".wranglerignore"]

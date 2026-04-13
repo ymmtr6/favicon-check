@@ -62,17 +62,17 @@
 
     <h2>ページ一覧</h2>
     <div class="links">
-      <a class="link-card" href="/favicon-check/">
+      <a class="link-card" href="/">
         <div class="dot" style="background:#FF4444"></div>
         <strong>Root /</strong>
         <span>favicon: 赤 (Red)</span>
       </a>
-      <a class="link-card" href="/favicon-check/sub/">
+      <a class="link-card" href="/sub/">
         <div class="dot" style="background:#4444FF"></div>
         <strong>Sub /sub/</strong>
         <span>favicon: 青 (Blue)</span>
       </a>
-      <a class="link-card" href="/favicon-check/query/">
+      <a class="link-card" href="/query/">
         <div class="dot" style="background:#44BB44"></div>
         <strong>Query /query/</strong>
         <span>クエリパラメータで動的変更 ← 現在地</span>
@@ -111,17 +111,17 @@
 
     <h2>URLで直接指定</h2>
     <table class="info-table">
-      <tr><th>Red</th><td><a href="/favicon-check/query/?color=red">/query/?color=red</a></td></tr>
-      <tr><th>Blue</th><td><a href="/favicon-check/query/?color=blue">/query/?color=blue</a></td></tr>
-      <tr><th>Green</th><td><a href="/favicon-check/query/?color=green">/query/?color=green</a></td></tr>
-      <tr><th>Yellow</th><td><a href="/favicon-check/query/?color=yellow">/query/?color=yellow</a></td></tr>
-      <tr><th>Purple</th><td><a href="/favicon-check/query/?color=purple">/query/?color=purple</a></td></tr>
-      <tr><th>Orange</th><td><a href="/favicon-check/query/?color=orange">/query/?color=orange</a></td></tr>
+      <tr><th>Red</th><td><a href="/query/?color=red">/query/?color=red</a></td></tr>
+      <tr><th>Blue</th><td><a href="/query/?color=blue">/query/?color=blue</a></td></tr>
+      <tr><th>Green</th><td><a href="/query/?color=green">/query/?color=green</a></td></tr>
+      <tr><th>Yellow</th><td><a href="/query/?color=yellow">/query/?color=yellow</a></td></tr>
+      <tr><th>Purple</th><td><a href="/query/?color=purple">/query/?color=purple</a></td></tr>
+      <tr><th>Orange</th><td><a href="/query/?color=orange">/query/?color=orange</a></td></tr>
     </table>
 
     <h2>実装コード</h2>
     <pre><code>function setFavicon(color) {
-  const base = '/favicon-check/favicons/';
+  const base = '/favicons/';
   const validColors = ['red','blue','green','yellow','purple','orange'];
   if (!validColors.includes(color)) return;
 
@@ -160,7 +160,7 @@
   </main>
 
   <script>
-    const BASE = '/favicon-check/favicons/';
+    const BASE = '/favicons/';
     const VALID_COLORS = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
     const COLOR_LABELS = {
       red: '🔴 Red', blue: '🔵 Blue', green: '🟢 Green',

@@ -1,0 +1,4 @@
+.git
+.wranglerignore
+wrangler.toml
+_config.yml
